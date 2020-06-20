@@ -1,7 +1,5 @@
 ﻿using IMS_CURD.Repository;
 using Microsoft.Extensions.Logging;
-using NLog;
-using ILogger = Microsoft.Extensions.Logging.ILogger;
 
 namespace IMS_CURD.DataManager
 {

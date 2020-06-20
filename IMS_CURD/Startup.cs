@@ -38,7 +38,7 @@ namespace IMS_CURD
         {
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+                //app.UseDeveloperExceptionPage();
             }
 
             app.UseHttpsRedirection();

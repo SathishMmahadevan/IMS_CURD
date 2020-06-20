@@ -3,9 +3,9 @@ using Microsoft.Extensions.Hosting;
 
 namespace IMS_CURD
 {
-    public class Program
+    public static class Program
     {
-        protected static void Main(string[] args)
+        public  static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();
         }

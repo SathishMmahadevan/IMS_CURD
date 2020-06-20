@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using IMS_CURD.Data;
 using IMS_CURD.Repository;
 using Microsoft.AspNetCore.Mvc;
-using ILogger = Microsoft.Extensions.Logging.ILogger;
-using Microsoft.Extensions.Logging;
 
 namespace IMS_CURD.Controllers
 {
