@@ -5,32 +5,33 @@ using ILogger = Microsoft.Extensions.Logging.ILogger;
 
 namespace IMS_CURD.DataManager
 {
-    public class LogNLog : ILog
-    {
-        private static readonly ILogger logger = (ILogger)LogManager.GetCurrentClassLogger();
+    public class LogNLog : ILog    {
+        
+        private readonly ILogger<LogNLog> _logger;
 
-        public LogNLog()
+       
+        public LogNLog(ILogger<LogNLog> logger)
         {
+            _logger = logger;
         }
-
         public void Information(string message)
         {
-            logger.LogInformation(message);
+            _logger.LogInformation(message);
         }
 
         public void Warning(string message)
         {
-            logger.LogWarning(message);
+            _logger.LogWarning(message);
         }
 
         public void Debug(string message)
         {
-            logger.LogDebug(message);
+            _logger.LogDebug(message);
         }
 
         public void Error(string message)
         {
-            logger.LogError(message);
+            _logger.LogError(message);
         }
     }
 }

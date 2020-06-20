@@ -12,11 +12,12 @@ namespace IMS_CURD.Controllers
     [ApiController]
 	public class InventoryMasterController : ControllerBase
 	{
-		private readonly IDataRepository<Inventory> _dataRepository;
-		private static readonly ILogger logger;
-		public InventoryMasterController(IDataRepository<Inventory> dataRepository)
+		private readonly IDataRepository<Inventory> _dataRepository;		
+		private readonly ILogger<InventoryMasterController> _logger;
+		public InventoryMasterController(IDataRepository<Inventory> dataRepository, ILogger<InventoryMasterController> logger)
 		{
 			_dataRepository = dataRepository;
+			_logger = logger;
 		}
 		
 		[HttpGet]
@@ -29,7 +30,7 @@ namespace IMS_CURD.Controllers
 			}
 			catch(Exception ex)
             {
-				logger.LogError($"Something went wrong: {ex}");				
+				_logger.LogError($"Something went wrong: {ex}");				
 				return StatusCode(500, "Internal server error");
 			}
 		}
@@ -51,7 +52,7 @@ namespace IMS_CURD.Controllers
 			}
 			catch (Exception ex)
 			{
-				logger.LogError($"Something went wrong: {ex}");
+				_logger.LogError($"Something went wrong: {ex}");
 				return StatusCode(500, "Internal server error");
 			}
 
@@ -76,7 +77,7 @@ namespace IMS_CURD.Controllers
 			}
 			catch (Exception ex)
 			{
-				logger.LogError($"Something went wrong: {ex}");
+				_logger.LogError($"Something went wrong: {ex}");
 				return StatusCode(500, "Internal server error");
 			}
 		}
@@ -102,7 +103,7 @@ namespace IMS_CURD.Controllers
 			}
 			catch (Exception ex)
 			{
-				logger.LogError($"Something went wrong: {ex}");
+				_logger.LogError($"Something went wrong: {ex}");
 				return StatusCode(500, "Internal server error");
 			}
 		}
@@ -123,7 +124,7 @@ namespace IMS_CURD.Controllers
 			}
 			catch (Exception ex)
 			{
-				logger.LogError($"Something went wrong: {ex}");
+				_logger.LogError($"Something went wrong: {ex}");
 				return StatusCode(500, "Internal server error");
 			}
 		}
