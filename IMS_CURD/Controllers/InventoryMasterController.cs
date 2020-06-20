@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using IMS_CURD.Data;
 using IMS_CURD.Repository;
 using Microsoft.AspNetCore.Mvc;
+using NLog;
+using ILogger = Microsoft.Extensions.Logging.ILogger;
+using Microsoft.Extensions.Logging;
 
 namespace IMS_CURD.Controllers
 {
@@ -10,8 +13,8 @@ namespace IMS_CURD.Controllers
     [ApiController]
 	public class InventoryMasterController : ControllerBase
 	{
-		private readonly IDataRepository<Inventory> _dataRepository;		
-		
+		private readonly IDataRepository<Inventory> _dataRepository;
+		private static readonly ILogger logger = (ILogger)LogManager.GetCurrentClassLogger();
 		public InventoryMasterController(IDataRepository<Inventory> dataRepository)
 		{
 			_dataRepository = dataRepository;
@@ -25,9 +28,10 @@ namespace IMS_CURD.Controllers
 				IEnumerable<Inventory> inventories = _dataRepository.GetAll();
 				return Ok(inventories);
 			}
-			catch(Exception)
+			catch(Exception ex)
             {
-				throw new Exception();
+				logger.LogError($"Something went wrong: {ex}");				
+				return StatusCode(500, "Internal server error");
 			}
 		}
 
@@ -46,9 +50,10 @@ namespace IMS_CURD.Controllers
 
 				return Ok(inventory);
 			}
-			catch (Exception)
+			catch (Exception ex)
 			{
-				throw new Exception();
+				logger.LogError($"Something went wrong: {ex}");
+				return StatusCode(500, "Internal server error");
 			}
 
 		}
@@ -70,9 +75,10 @@ namespace IMS_CURD.Controllers
 					  new { Id = inventory.InventoryID },
 					  inventory);
 			}
-			catch (Exception)
+			catch (Exception ex)
 			{
-				throw new Exception();
+				logger.LogError($"Something went wrong: {ex}");
+				return StatusCode(500, "Internal server error");
 			}
 		}
 		// PUT: api/Inventory/5
@@ -95,9 +101,10 @@ namespace IMS_CURD.Controllers
 				_dataRepository.Update(inventoryToUpdate, inventory);
 				return NoContent();
 			}
-			catch (Exception)
+			catch (Exception ex)
 			{
-				throw new Exception();
+				logger.LogError($"Something went wrong: {ex}");
+				return StatusCode(500, "Internal server error");
 			}
 		}
 		// DELETE: api/inventory/2
@@ -115,9 +122,10 @@ namespace IMS_CURD.Controllers
 				_dataRepository.Delete(inventory);
 				return NoContent();
 			}
-			catch (Exception)
+			catch (Exception ex)
 			{
-				throw new Exception();
+				logger.LogError($"Something went wrong: {ex}");
+				return StatusCode(500, "Internal server error");
 			}
 		}
 

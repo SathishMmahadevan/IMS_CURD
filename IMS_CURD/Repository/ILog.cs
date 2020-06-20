@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace IMS_CURD.Repository
+﻿namespace IMS_CURD.Repository
 {
     public interface ILog
     {
