@@ -5,7 +5,7 @@ namespace IMS_CURD
 {
     public class Program
     {
-        public static void Main(string[] args)
+        protected static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();
         }

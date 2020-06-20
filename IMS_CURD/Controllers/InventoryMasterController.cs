@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using IMS_CURD.Data;
 using IMS_CURD.Repository;
 using Microsoft.AspNetCore.Mvc;
-using NLog;
 using ILogger = Microsoft.Extensions.Logging.ILogger;
 using Microsoft.Extensions.Logging;
 
@@ -14,12 +13,12 @@ namespace IMS_CURD.Controllers
 	public class InventoryMasterController : ControllerBase
 	{
 		private readonly IDataRepository<Inventory> _dataRepository;
-		private static readonly ILogger logger = (ILogger)LogManager.GetCurrentClassLogger();
+		private static readonly ILogger logger;
 		public InventoryMasterController(IDataRepository<Inventory> dataRepository)
 		{
 			_dataRepository = dataRepository;
 		}
-
+		
 		[HttpGet]
 		public  IActionResult Get()
 		{
