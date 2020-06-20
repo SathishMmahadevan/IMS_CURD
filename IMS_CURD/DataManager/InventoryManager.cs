@@ -3,7 +3,6 @@ using IMS_CURD.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace IMS_CURD.DataManager
 {
@@ -24,31 +23,58 @@ namespace IMS_CURD.DataManager
 
         public Inventory Get(long id)
         {
-            return _inventoryContext.InventoryMaster
-                  .FirstOrDefault(i => i.InventoryID == id);
+            try
+            {
+                return _inventoryContext.InventoryMaster
+                      .FirstOrDefault(i => i.InventoryID == id);
+            }
+            catch (Exception)
+            {
+                throw new Exception();
+            }
         }
 
         public void Add(Inventory entity)
         {
-            _inventoryContext.InventoryMaster.Add(entity);
-            _inventoryContext.SaveChanges();
+            try
+            {
+                _inventoryContext.InventoryMaster.Add(entity);
+                _inventoryContext.SaveChanges();
+            }
+            catch (Exception)
+            {
+                throw new Exception();
+            }
         }
 
         public void Update(Inventory inventory, Inventory entity)
         {
-            inventory.InventoryID = entity.InventoryID;
-            inventory.ItemName = entity.ItemName;
-            inventory.StockQty = entity.StockQty;
-            inventory.ReorderQty = entity.ReorderQty;
-            inventory.PriorityStatus = entity.PriorityStatus;
-
-            _inventoryContext.SaveChanges();
+            try
+            {
+                inventory.InventoryID = entity.InventoryID;
+                inventory.ItemName = entity.ItemName;
+                inventory.StockQty = entity.StockQty;
+                inventory.ReorderQty = entity.ReorderQty;
+                inventory.PriorityStatus = entity.PriorityStatus;
+                _inventoryContext.SaveChanges();
+            }
+            catch (Exception)
+            {
+                throw new Exception();
+            }
         }
 
         public void Delete(Inventory inventory)
         {
-            _inventoryContext.InventoryMaster.Remove(inventory);
-            _inventoryContext.SaveChanges();
+            try
+            {
+                _inventoryContext.InventoryMaster.Remove(inventory);
+                _inventoryContext.SaveChanges();
+            }
+            catch (Exception)
+            {
+                throw new Exception();
+            }
         }
     }
 }

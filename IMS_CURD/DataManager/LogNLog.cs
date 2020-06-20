@@ -1,10 +1,6 @@
 ﻿using IMS_CURD.Repository;
 using Microsoft.Extensions.Logging;
 using NLog;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using ILogger = Microsoft.Extensions.Logging.ILogger;
 
 namespace IMS_CURD.DataManager

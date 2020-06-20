@@ -1,15 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 using IMS_CURD.Data;
 using IMS_CURD.Repository;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
-using NLog;
 
 namespace IMS_CURD.Controllers
 {
@@ -32,10 +25,10 @@ namespace IMS_CURD.Controllers
 				IEnumerable<Inventory> inventories = _dataRepository.GetAll();
 				return Ok(inventories);
 			}
-			catch(Exception e)
+			catch(Exception)
             {
-				throw e;
-            }
+				throw new Exception();
+			}
 		}
 
 		// GET: api/Inventory/1
@@ -52,9 +45,13 @@ namespace IMS_CURD.Controllers
 				}
 
 				return Ok(inventory);
-			}catch(Exception e) { throw e; }
+			}
+			catch (Exception)
+			{
+				throw new Exception();
+			}
 
-        }
+		}
 
 		// POST: api/inventory
 		[HttpPost]
@@ -73,7 +70,10 @@ namespace IMS_CURD.Controllers
 					  new { Id = inventory.InventoryID },
 					  inventory);
 			}
-			catch (Exception e) { throw e; }
+			catch (Exception)
+			{
+				throw new Exception();
+			}
 		}
 		// PUT: api/Inventory/5
 		[HttpPut("{id}")]
@@ -95,7 +95,10 @@ namespace IMS_CURD.Controllers
 				_dataRepository.Update(inventoryToUpdate, inventory);
 				return NoContent();
 			}
-			catch (Exception e) { throw e; }
+			catch (Exception)
+			{
+				throw new Exception();
+			}
 		}
 		// DELETE: api/inventory/2
 		[HttpDelete("{id}")]
@@ -112,7 +115,10 @@ namespace IMS_CURD.Controllers
 				_dataRepository.Delete(inventory);
 				return NoContent();
 			}
-			catch (Exception e) { throw e; }
+			catch (Exception)
+			{
+				throw new Exception();
+			}
 		}
 
 		}
