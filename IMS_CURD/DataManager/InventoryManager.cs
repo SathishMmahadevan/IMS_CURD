@@ -23,34 +23,25 @@ namespace IMS_CURD.DataManager
 
         public Inventory Get(long id)
         {
-            try
-            {
+            
                 return _inventoryContext.InventoryMaster
                       .FirstOrDefault(i => i.InventoryID == id);
-            }
-            catch (Exception)
-            {
-                throw new Exception();
-            }
+            
+            
         }
 
         public void Add(Inventory entity)
         {
-            try
-            {
+           
                 _inventoryContext.InventoryMaster.Add(entity);
                 _inventoryContext.SaveChanges();
-            }
-            catch (Exception)
-            {
-                throw new Exception();
-            }
+            
+            
         }
 
         public void Update(Inventory inventory, Inventory entity)
         {
-            try
-            {
+           
                 inventory.InventoryID = entity.InventoryID;
                 inventory.ItemName = entity.ItemName;
                 inventory.StockQty = entity.StockQty;
@@ -58,23 +49,14 @@ namespace IMS_CURD.DataManager
                 inventory.PriorityStatus = entity.PriorityStatus;
                 _inventoryContext.SaveChanges();
             }
-            catch (Exception)
-            {
-                throw new Exception();
-            }
-        }
+           
+        
 
         public void Delete(Inventory inventory)
         {
-            try
-            {
                 _inventoryContext.InventoryMaster.Remove(inventory);
-                _inventoryContext.SaveChanges();
-            }
-            catch (Exception)
-            {
-                throw new Exception();
-            }
+                _inventoryContext.SaveChanges();           
+            
         }
     }
 }
