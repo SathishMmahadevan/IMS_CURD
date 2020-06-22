@@ -1,6 +1,6 @@
 #!/bin/bash
 
-apiappname=ShoeCoAPI$(openssl rand -hex 5)
+apiappname=InventoryManagementAPI$(openssl rand -hex 5)
 
 printf "Setting username and password for Git ... (1/7)\n\n"
 
