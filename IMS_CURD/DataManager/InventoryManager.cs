@@ -11,18 +11,13 @@ namespace IMS_CURD.DataManager
     public class InventoryManager : IDataRepository<Inventory>
     {
         readonly InventoryContext _inventoryContext;
-        private IDistributedCache redisCache;
+        private readonly IDistributedCache redisCache;
 
         public InventoryManager(InventoryContext context, IDistributedCache cache)
         {
             _inventoryContext = context;
             this.redisCache = cache;
         }
-
-        //public IEnumerable<Inventory> GetAll()
-        //{
-        //    return _inventoryContext.InventoryMaster.ToList();
-        //}
 
 
         public IEnumerable<Inventory> GetAll()
@@ -49,7 +44,7 @@ namespace IMS_CURD.DataManager
             }
             catch (StackExchange.Redis.RedisConnectionException)
             {
-                return null;
+                return Enumerable.Empty<Inventory>();
             }
         }
 
