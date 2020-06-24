@@ -41,10 +41,7 @@ namespace IMS_CURD
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILog logger)
         {
-            if (env.IsDevelopment())
-            {
-                
-            }
+            
 
             app.UseHttpsRedirection();
 
