@@ -1,6 +1,5 @@
 ﻿
 using System.Collections.Generic;
-
 namespace IMS_CURD.Repository
 {
     public interface IDataRepository<TEntity>

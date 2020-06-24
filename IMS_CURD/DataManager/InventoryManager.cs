@@ -1,24 +1,61 @@
 ﻿using IMS_CURD.Data;
 using IMS_CURD.Repository;
+using Microsoft.Extensions.Caching.Distributed;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 
 namespace IMS_CURD.DataManager
 {
     public class InventoryManager : IDataRepository<Inventory>
     {
         readonly InventoryContext _inventoryContext;
+        private IDistributedCache redisCache;
 
-
-        public InventoryManager(InventoryContext context)
+        public InventoryManager(InventoryContext context, IDistributedCache cache)
         {
             _inventoryContext = context;
+            this.redisCache = cache;
         }
+
+        //public IEnumerable<Inventory> GetAll()
+        //{
+        //    return _inventoryContext.InventoryMaster.ToList();
+        //}
+
 
         public IEnumerable<Inventory> GetAll()
         {
-            return _inventoryContext.InventoryMaster.ToList();
+            try
+            {
+                List<Inventory> inventories;
+                string jsonInventories = redisCache.GetString("reddisCacheInventories");
+                if (string.IsNullOrEmpty(jsonInventories))
+                {
+                    inventories = _inventoryContext.InventoryMaster.ToList();
+                    jsonInventories = JsonSerializer.Serialize<List<Inventory>>(inventories);
+                    var options = new DistributedCacheEntryOptions();
+                    options.SetAbsoluteExpiration(DateTimeOffset.Now.AddMinutes(1));
+                    redisCache.SetString("reddisCacheInventories", jsonInventories, options);
+                }
+
+                JsonSerializerOptions opt = new JsonSerializerOptions()
+                {
+                    PropertyNameCaseInsensitive = true
+                };
+                List<Inventory> data = JsonSerializer.Deserialize<List<Inventory>>(jsonInventories, opt);
+                return data;
+            }
+            catch (StackExchange.Redis.RedisConnectionException)
+            {
+                return null;
+            }
         }
+
+        
+        
+
 
         public Inventory Get(long id)
         {

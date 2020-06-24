@@ -26,6 +26,11 @@ namespace IMS_CURD
             services.AddControllers();            
             services.AddSingleton<ILog, LogNLog>();
             services.AddDbContext<InventoryContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddStackExchangeRedisCache(option =>
+            {
+                option.Configuration =
+        Configuration.GetConnectionString("ReddisCache");
+            });
             services.AddScoped<IDataRepository<Inventory>, InventoryManager>();
             services.AddSwaggerGen(c =>
             {

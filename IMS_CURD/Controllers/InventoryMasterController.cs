@@ -9,14 +9,14 @@ namespace IMS_CURD.Controllers
 	[ApiController]
 	public class InventoryMasterController : ControllerBase
 	{
-		private readonly IDataRepository<Inventory> _dataRepository;
+		private readonly IDataRepository<Inventory> _dataRepository;		
 
 		public InventoryMasterController(IDataRepository<Inventory> dataRepository)
 		{
-			_dataRepository = dataRepository;
+			_dataRepository = dataRepository;			
 
 		}
-
+		
 		[HttpGet]
 		public IActionResult Get()
 		{
@@ -88,5 +88,7 @@ namespace IMS_CURD.Controllers
 			return NoContent();
 
 		}
+
+		
 	}
 }
